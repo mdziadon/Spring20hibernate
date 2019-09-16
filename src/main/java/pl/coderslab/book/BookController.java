@@ -31,6 +31,13 @@ public class BookController {
         this.authorService = authorService;
     }
 
+    @GetMapping("/list/{rating}")
+    @ResponseBody
+    public String getBooks(@PathVariable Integer rating) {
+        List<Book> books = bookService.getRatingList(rating);
+        return books.toString();
+    }
+
     @GetMapping("/add")
     @ResponseBody
     public String addBook() {
