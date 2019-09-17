@@ -14,12 +14,17 @@
             <th>Title</th>
             <th>Rating</th>
             <th>Publisher</th>
+            <th>Actions</th>
         </tr>
         <c:forEach items="${books}" var="book">
             <tr>
                 <td>${book.title}</td>
                 <td>${book.rating}</td>
                 <td>${book.publisher.name}</td>
+                <td>
+                    <a href="/books/update/${book.id}">Edit</a>
+                    <a href="/books/delete/${book.id}">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

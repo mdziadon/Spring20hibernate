@@ -7,6 +7,8 @@
 </head>
 <body>
     <form:form method="post" modelAttribute="book">
+
+        <form:hidden path="id" value="${book.id}"/>
         <div>
             <label>Title:
                 <form:input path="title"/>
