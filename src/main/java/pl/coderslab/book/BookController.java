@@ -9,7 +9,6 @@ import pl.coderslab.author.AuthorService;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
