@@ -3,6 +3,13 @@
 <html>
 <head>
     <title>Title</title>
+    <script>
+        function confirmDelete(id, title) {
+            if (confirm("Do you want to delete a book '" + title + "'?")) {
+                window.location.href = "/books/delete/" + id;
+            }
+        }
+    </script>
 </head>
 <body>
     <div>
@@ -23,7 +30,7 @@
                 <td>${book.publisher.name}</td>
                 <td>
                     <a href="/books/update/${book.id}">Edit</a>
-                    <a href="/books/delete/${book.id}">Delete</a>
+                    <a href="#" onclick="confirmDelete(${book.id}, '${book.title}')">Delete</a>
                 </td>
             </tr>
         </c:forEach>
