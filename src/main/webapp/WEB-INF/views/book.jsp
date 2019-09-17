@@ -33,6 +33,13 @@
                 <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id"/>
             </label>
         </div>
+
+        <div>
+            <label>Authors:
+                <form:select path="authors" items="${authors}" itemLabel="fullName" itemValue="id"/>
+            </label>
+        </div>
+
         <input type="submit" value="Save">
     </form:form>
 </body>

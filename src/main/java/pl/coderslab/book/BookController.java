@@ -86,4 +86,9 @@ public class BookController {
     public List<Publisher> getPublishers() {
         return publisherService.findAll();
     }
+
+    @ModelAttribute("authors")
+    public List<Author> getAuthors() {
+        return authorService.findAll();
+    }
 }
