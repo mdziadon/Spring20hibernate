@@ -37,4 +37,9 @@ public class BookDao {
         query.setParameter("param", rating);
         return query.getResultList();
     }
+
+    public List<Book> findAll() {
+        Query query = entityManager.createQuery("select b from Book b");
+        return query.getResultList();
+    }
 }

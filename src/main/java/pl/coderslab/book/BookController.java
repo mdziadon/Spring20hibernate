@@ -2,10 +2,8 @@ package pl.coderslab.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorService;
 import pl.coderslab.publisher.Publisher;
@@ -31,6 +29,13 @@ public class BookController {
         this.authorService = authorService;
     }
 
+    @GetMapping("/list")
+    public String getBooks(Model model) {
+        List<Book> books = bookService.findAll();
+        model.addAttribute("books", books);
+        return "bookList";
+    }
+
     @GetMapping("/list/{rating}")
     @ResponseBody
     public String getBooks(@PathVariable Integer rating) {
@@ -39,29 +44,15 @@ public class BookController {
     }
 
     @GetMapping("/add")
-    @ResponseBody
-    public String addBook() {
-        // Tworzymy wydawce
-        Publisher publisher = new Publisher();
-        publisher.setName("Wydawca testowy");
+    public String addBook(Model model) {
+        model.addAttribute("book", new Book());
+        return "book";
+    }
 
-        // Tworzymy listę autorów
-        List<Author> authors = new ArrayList<>();
-        Author author = new Author();
-        author.setFirstName("Bruce");
-        author.setLastName("Eckel");
-        authors.add(author);
-
-        // Tworzymy książkę
-        Book book = new Book();
-        book.setTitle("Thinking in Java");
-        book.setAuthors(authors);
-        book.setPublisher(publisher);
-
-        authorService.saveAuthor(author);
-        publisherService.savePublisher(publisher);
+    @PostMapping("/add")
+    public String addBook(@ModelAttribute Book book) {
         bookService.saveBook(book);
-        return "Dodano ksiazke o id: " + book.getId();
+        return "redirect:list";
     }
 
     @GetMapping("/update/{id}")
@@ -85,5 +76,10 @@ public class BookController {
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return "Usunieto ksiazke o id: " + id;
+    }
+
+    @ModelAttribute("publishers")
+    public List<Publisher> getPublishers() {
+        return publisherService.findAll();
     }
 }

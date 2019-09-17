@@ -36,4 +36,8 @@ public class BookService {
     public List<Book> getRatingList(int rating) {
         return bookDao.getRatingList(rating);
     }
+
+    public List<Book> findAll() {
+        return bookDao.findAll();
+    }
 }
