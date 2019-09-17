@@ -21,6 +21,7 @@
             <th>Title</th>
             <th>Rating</th>
             <th>Publisher</th>
+            <th>Authors</th>
             <th>Actions</th>
         </tr>
         <c:forEach items="${books}" var="book">
@@ -28,6 +29,11 @@
                 <td>${book.title}</td>
                 <td>${book.rating}</td>
                 <td>${book.publisher.name}</td>
+                <td>
+                    <c:forEach items="${book.authors}" var="author">
+                        ${author.fullName},
+                    </c:forEach>
+                </td>
                 <td>
                     <a href="/books/update/${book.id}">Edit</a>
                     <a href="#" onclick="confirmDelete(${book.id}, '${book.title}')">Delete</a>
