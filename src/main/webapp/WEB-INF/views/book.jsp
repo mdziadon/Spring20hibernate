@@ -13,6 +13,7 @@
             <label>Title:
                 <form:input path="title"/>
             </label>
+            <form:errors path="title" element="div"/>
         </div>
         <div>
             <label>Rating:
@@ -22,22 +23,33 @@
                     </c:forEach>
                 </form:select>
             </label>
+            <form:errors path="rating" element="div"/>
         </div>
+        <div>
+            <label>Pages:
+                <form:input path="pages" type="number"/>
+            </label>
+            <form:errors path="pages" element="div"/>
+        </div>
+
         <div>
             <label>Description:
                 <form:textarea path="description" rows="3" cols="60"/>
             </label>
+            <form:errors path="description" element="div"/>
         </div>
         <div>
             <label>Publisher:
                 <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id"/>
             </label>
+            <form:errors path="publisher" element="div"/>
         </div>
 
         <div>
             <label>Authors:
                 <form:select path="authors" items="${authors}" itemLabel="fullName" itemValue="id"/>
             </label>
+            <form:errors path="authors" element="div"/>
         </div>
 
         <input type="submit" value="Save">
