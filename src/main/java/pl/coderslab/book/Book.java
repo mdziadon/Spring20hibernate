@@ -3,13 +3,11 @@ package pl.coderslab.book;
 import org.hibernate.validator.constraints.Range;
 import pl.coderslab.author.Author;
 import pl.coderslab.publisher.Publisher;
+import pl.coderslab.validation.BookValidationGroup;
+import pl.coderslab.validation.PropositionValidationGroup;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -20,24 +18,27 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min = 5)
+    @NotNull(groups = {BookValidationGroup.class, PropositionValidationGroup.class})
+    @Size(min = 5, groups = {BookValidationGroup.class, PropositionValidationGroup.class})
     private String title;
 
-    @Range(min = 1, max = 10)
+    @Range(min = 1, max = 10, groups = BookValidationGroup.class)
     private int rating;
 
-    @Min(2)
+    @Min(value = 2, groups = BookValidationGroup.class)
     private int pages;
 
-    @Size(max = 600)
+    @NotBlank(groups = PropositionValidationGroup.class)
+    @Size(max = 600, groups = {BookValidationGroup.class, PropositionValidationGroup.class})
     private String description;
 
-    @NotNull
+    private boolean proposition = false;
+
+    @NotNull(groups = BookValidationGroup.class)
     @ManyToOne
     private Publisher publisher;
 
-    @NotEmpty
+    @NotEmpty(groups = BookValidationGroup.class)
     @ManyToMany
     @JoinTable(name = "book_authors",
             joinColumns = @JoinColumn(name = "book_id"),
@@ -82,6 +83,14 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isProposition() {
+        return proposition;
+    }
+
+    public void setProposition(boolean proposition) {
+        this.proposition = proposition;
     }
 
     public Publisher getPublisher() {

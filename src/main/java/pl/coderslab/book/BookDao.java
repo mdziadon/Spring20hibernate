@@ -42,4 +42,9 @@ public class BookDao {
         Query query = entityManager.createQuery("select distinct b from Book b left join fetch b.authors");
         return query.getResultList();
     }
+
+    public List<Book> findAllPropositions() {
+        Query query = entityManager.createQuery("select b from Book b where b.proposition = true");
+        return query.getResultList();
+    }
 }

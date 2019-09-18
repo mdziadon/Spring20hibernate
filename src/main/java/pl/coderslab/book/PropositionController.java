@@ -10,14 +10,14 @@ import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorService;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
-import pl.coderslab.validation.BookValidationGroup;
+import pl.coderslab.validation.PropositionValidationGroup;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/propositions")
+public class PropositionController {
 
     private BookService bookService;
 
@@ -26,7 +26,7 @@ public class BookController {
     private AuthorService authorService;
 
     @Autowired
-    public BookController(BookService bookService, PublisherService publisherService, AuthorService authorService) {
+    public PropositionController(BookService bookService, PublisherService publisherService, AuthorService authorService) {
         this.bookService = bookService;
         this.publisherService = publisherService;
         this.authorService = authorService;
@@ -34,16 +34,9 @@ public class BookController {
 
     @GetMapping("/list")
     public String getBooks(Model model) {
-        List<Book> books = bookService.findAll();
-        model.addAttribute("books", books);
-        return "bookList";
-    }
-
-    @GetMapping("/list/{rating}")
-    @ResponseBody
-    public String getBooks(@PathVariable Integer rating) {
-        List<Book> books = bookService.getRatingList(rating);
-        return books.toString();
+        List<Book> propositions = bookService.findAllPropositions();
+        model.addAttribute("propositions", propositions);
+        return "propositionList";
     }
 
     @GetMapping("/add")
@@ -53,10 +46,11 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute @Validated(BookValidationGroup.class) Book book, BindingResult result) {
+    public String addBook(@ModelAttribute @Validated(PropositionValidationGroup.class) Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "book";
         }
+        book.setProposition(true);
         bookService.saveBook(book);
         return "redirect:list";
     }
@@ -69,10 +63,11 @@ public class BookController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateBook(@ModelAttribute @Validated(BookValidationGroup.class) Book book, BindingResult result) {
+    public String updateBook(@ModelAttribute @Validated(PropositionValidationGroup.class) Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "book";
         }
+        book.setProposition(true);
         bookService.updateBook(book);
         return "redirect:../list";
     }

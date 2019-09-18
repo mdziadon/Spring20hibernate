@@ -47,4 +47,8 @@ public class BookService {
     public List<Book> findAll() {
         return bookDao.findAll();
     }
+
+    public List<Book> findAllPropositions() {
+        return bookDao.findAllPropositions();
+    }
 }
