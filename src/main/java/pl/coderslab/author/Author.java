@@ -2,6 +2,7 @@ package pl.coderslab.author;
 
 import org.hibernate.validator.constraints.pl.PESEL;
 import pl.coderslab.book.Book;
+import pl.coderslab.validation.Age;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -27,6 +28,9 @@ public class Author {
 
     @Email
     private String email;
+
+    @Age(min = 17)
+    private Integer yearOfBirth;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
@@ -73,6 +77,14 @@ public class Author {
 
     public List<Book> getBooks() {
         return books;
+    }
+
+    public Integer getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(Integer yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
     public void setBooks(List<Book> books) {
