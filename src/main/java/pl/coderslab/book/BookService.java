@@ -53,4 +53,20 @@ public class BookService {
     public List<Book> findAllPropositions() {
         return bookRepository.findByPropositionTrue();
     }
+
+    public List<Book> findBooksByTitle(String title) {
+        return bookRepository.findByTitle(title);
+    }
+
+    public List<Book> findBooksByCategoryId(Long categoryId) {
+        return bookRepository.findByCategoryId(categoryId);
+    }
+
+    public List<Book> findBooksByAuthorId(Long authorId) {
+        return bookRepository.findByAuthorsId(authorId);
+    }
+
+    public Book findFirstByCategoryIdOrderByTitle(Long categoryId) {
+        return bookRepository.findFirstByCategoryIdOrderByTitle(categoryId);
+    }
 }

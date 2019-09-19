@@ -90,6 +90,34 @@ public class BookController {
         return "redirect:../list";
     }
 
+    @GetMapping("/findByTitle")
+    @ResponseBody
+    public String findBooksByTitle() {
+        List<Book> books = bookService.findBooksByTitle("Janko Muzykant");
+        return books.toString();
+    }
+
+    @GetMapping("/findByCategoryId")
+    @ResponseBody
+    public String findBooksByCategoryId() {
+        List<Book> books = bookService.findBooksByCategoryId(1L);
+        return books.toString();
+    }
+
+    @GetMapping("/findBooksByAuthorId/{authorId}")
+    @ResponseBody
+    public String findBooksByAuthorId(@PathVariable Long authorId) {
+        List<Book> books = bookService.findBooksByAuthorId(authorId);
+        return books.toString();
+    }
+
+    @GetMapping("/findFirstByCategoryId/{categoryId}")
+    @ResponseBody
+    public String findFirstByCategoryId(@PathVariable Long categoryId) {
+        Book book = bookService.findFirstByCategoryIdOrderByTitle(categoryId);
+        return book.toString();
+    }
+
     @ModelAttribute("publishers")
     public List<Publisher> getPublishers() {
         return publisherService.findAll();

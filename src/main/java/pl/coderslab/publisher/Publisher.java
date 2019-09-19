@@ -21,9 +21,11 @@ public class Publisher {
     private String name;
 
     @NIP
+    @Column(unique = true)
     private String nip;
 
     @REGON
+    @Column(unique = true)
     private String regon;
 
     @OneToMany(mappedBy = "publisher")
