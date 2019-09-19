@@ -12,7 +12,6 @@ import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
 import pl.coderslab.validation.BookValidationGroup;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller

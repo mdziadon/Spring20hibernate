@@ -11,44 +11,46 @@ import java.util.List;
 @Transactional
 public class BookService {
 
-    private BookDao bookDao;
+    private BookRepository bookRepository;
 
     @Autowired
-    public BookService(BookDao bookDao) {
-        this.bookDao = bookDao;
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     public void saveBook(Book book) {
-        bookDao.saveBook(book);
+        bookRepository.save(book);
     }
 
     public void updateBook(Book book) {
-        bookDao.updateBook(book);
+        bookRepository.save(book);
     }
 
     public Book findBook(Long id) {
-        return bookDao.findBook(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     public Book findBookWithAuthors(Long id) {
-        Book book = bookDao.findBook(id);
+        Book book = findBook(id);
         Hibernate.initialize(book.getAuthors());
         return book;
     }
 
     public void deleteBook(Long id) {
-        bookDao.deleteBook(id);
+        bookRepository.deleteById(id);
     }
 
     public List<Book> getRatingList(int rating) {
-        return bookDao.getRatingList(rating);
+        return bookRepository.findByRatingGreaterThan(rating);
     }
 
     public List<Book> findAll() {
-        return bookDao.findAll();
+        List<Book> books = bookRepository.findAll();
+        books.forEach(b -> Hibernate.initialize(b.getAuthors()));
+        return books;
     }
 
     public List<Book> findAllPropositions() {
-        return bookDao.findAllPropositions();
+        return bookRepository.findByPropositionTrue();
     }
 }
