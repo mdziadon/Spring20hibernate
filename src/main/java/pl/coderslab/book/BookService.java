@@ -55,7 +55,7 @@ public class BookService {
     }
 
     public List<Book> findBooksByTitle(String title) {
-        return bookRepository.findByTitle(title);
+        return bookRepository.findByTitleQuery(title);
     }
 
     public List<Book> findBooksByCategoryId(Long categoryId) {
@@ -68,5 +68,13 @@ public class BookService {
 
     public Book findFirstByCategoryIdOrderByTitle(Long categoryId) {
         return bookRepository.findFirstByCategoryIdOrderByTitle(categoryId);
+    }
+
+    public List<Book> findByRatingBetweenQuery(int ratingFrom, int ratingTo) {
+        return bookRepository.findByRatingBetweenQuery(ratingFrom, ratingTo);
+    }
+
+    public void resetRating(int rating) {
+        bookRepository.resetRating(rating);
     }
 }

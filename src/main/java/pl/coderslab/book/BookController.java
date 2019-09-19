@@ -118,6 +118,19 @@ public class BookController {
         return book.toString();
     }
 
+    @GetMapping("/findByRatingBetween")
+    @ResponseBody
+    public String findByRatingBetween() {
+        List<Book> books = bookService.findByRatingBetweenQuery(3,5);
+        return books.toString();
+    }
+
+    @GetMapping("/resetRating/{rating}")
+    public String resetRating(@PathVariable int rating) {
+        bookService.resetRating(rating);
+        return "redirect:../list";
+    }
+
     @ModelAttribute("publishers")
     public List<Publisher> getPublishers() {
         return publisherService.findAll();
