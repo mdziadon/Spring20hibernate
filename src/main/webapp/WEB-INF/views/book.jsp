@@ -34,7 +34,7 @@
                     <div class="form-group col-md-6">
                         <label for="titleId">Title:</label>
                         <form:input path="title" class="form-control" id="titleId"/>
-                        <form:errors path="title" element="div"/>
+                        <form:errors path="title" element="div" cssClass="error"/>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="ratingId">Rating:</label>
@@ -43,12 +43,12 @@
                                 <form:option value="${number}"/>
                             </c:forEach>
                         </form:select>
-                        <form:errors path="rating" element="div"/>
+                        <form:errors path="rating" element="div" cssClass="error"/>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="pagesId">Pages:</label>
                         <form:input path="pages" type="number" class="form-control" id="pagesId"/>
-                        <form:errors path="pages" element="div"/>
+                        <form:errors path="pages" element="div" cssClass="error"/>
                     </div>
 
                 </div>
@@ -57,13 +57,13 @@
                     <div class="form-group col-md-6">
                         <label for="publisherId">Publisher:</label>
                         <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id" class="form-control" id="publisherId"/>
-                        <form:errors path="publisher" element="div"/>
+                        <form:errors path="publisher" element="div" cssClass="error"/>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="authorsId">Authors:</label>
                         <form:select path="authors" items="${authors}" itemLabel="fullName" itemValue="id" class="form-control" id="authorsId"/>
-                        <form:errors path="authors" element="div"/>
+                        <form:errors path="authors" element="div" cssClass="error"/>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                     <div class="form-group col-md-12">
                         <label for="descriptionId">Description:</label>
                         <form:textarea path="description" rows="3" cols="60" class="form-control" id="descriptionId"/>
-                        <form:errors path="description" element="div"/>
+                        <form:errors path="description" element="div" cssClass="error"/>
                     </div>
                 </div>
 
