@@ -4,55 +4,82 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>
+    <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
+    <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
 </head>
 <body>
-    <form:form method="post" modelAttribute="book">
 
-        <form:hidden path="id" value="${book.id}"/>
-        <div>
-            <label>Title:
-                <form:input path="title"/>
-            </label>
-            <form:errors path="title" element="div"/>
-        </div>
-        <div>
-            <label>Rating:
-                <form:select path="rating">
-                    <c:forEach begin="1" end="10" var="number">
-                        <form:option value="${number}"/>
-                    </c:forEach>
-                </form:select>
-            </label>
-            <form:errors path="rating" element="div"/>
-        </div>
-        <div>
-            <label>Pages:
-                <form:input path="pages" type="number"/>
-            </label>
-            <form:errors path="pages" element="div"/>
-        </div>
+<%@include file="/WEB-INF/views/header.jspf"%>
 
-        <div>
-            <label>Description:
-                <form:textarea path="description" rows="3" cols="60"/>
-            </label>
-            <form:errors path="description" element="div"/>
-        </div>
-        <div>
-            <label>Publisher:
-                <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id"/>
-            </label>
-            <form:errors path="publisher" element="div"/>
-        </div>
+<div class="container">
 
-        <div>
-            <label>Authors:
-                <form:select path="authors" items="${authors}" itemLabel="fullName" itemValue="id"/>
-            </label>
-            <form:errors path="authors" element="div"/>
-        </div>
+    <header>Add book</header>
 
-        <input type="submit" value="Save">
-    </form:form>
+    <div class="card">
+        <div class="card-body">
+            <a href="/books/list" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <form:form method="post" modelAttribute="book">
+
+                <form:hidden path="id" value="${book.id}"/>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="titleId">Title:</label>
+                        <form:input path="title" class="form-control" id="titleId"/>
+                        <form:errors path="title" element="div"/>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="ratingId">Rating:</label>
+                        <form:select path="rating" class="form-control" id="ratingId">
+                            <c:forEach begin="1" end="10" var="number">
+                                <form:option value="${number}"/>
+                            </c:forEach>
+                        </form:select>
+                        <form:errors path="rating" element="div"/>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="pagesId">Pages:</label>
+                        <form:input path="pages" type="number" class="form-control" id="pagesId"/>
+                        <form:errors path="pages" element="div"/>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="publisherId">Publisher:</label>
+                        <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id" class="form-control" id="publisherId"/>
+                        <form:errors path="publisher" element="div"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="authorsId">Authors:</label>
+                        <form:select path="authors" items="${authors}" itemLabel="fullName" itemValue="id" class="form-control" id="authorsId"/>
+                        <form:errors path="authors" element="div"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="descriptionId">Description:</label>
+                        <form:textarea path="description" rows="3" cols="60" class="form-control" id="descriptionId"/>
+                        <form:errors path="description" element="div"/>
+                    </div>
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-primary">
+            </form:form>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
