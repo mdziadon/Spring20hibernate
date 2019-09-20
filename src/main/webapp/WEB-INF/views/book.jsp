@@ -15,7 +15,7 @@
 
 <div class="container">
 
-    <header>Add book</header>
+    <header>${empty book.id ? 'Add Book' : 'Edit Book'}</header>
 
     <div class="card">
         <div class="card-body">
